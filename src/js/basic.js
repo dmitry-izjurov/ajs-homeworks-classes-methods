@@ -20,8 +20,13 @@ export default class Character {
     throw new Error('Нельзя повысить левел умершего');
   }
 
-  damage() {
-    this.health = 0;
+  damage(points) {
+    if (this.health > 0) {
+      this.health -= points * (1 - this.defence / 100);
+      if (this.health <= 0) {
+        this.health = 0;
+      }
+    }
     return this.health;
   }
 }
